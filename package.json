@@ -11,10 +11,20 @@
     "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.0",
     "chai": "^5.1.1",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "mocha": "^10.7.3",
     "supertest": "^7.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "testEnvironment": "jsdom"
   }
 }

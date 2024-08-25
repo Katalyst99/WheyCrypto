@@ -1,6 +1,7 @@
 // tests/frontend/auth.test.js
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import SignupForm from '../../frontend/src/components/SignupForm';
 import * as authService from '../../frontend/src/services/authService';
 
