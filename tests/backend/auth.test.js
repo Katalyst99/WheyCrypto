@@ -1,4 +1,3 @@
-// tests/backend/auth.test.js
 const request = require('supertest');
 const app = require('../../backend/index'); // Ensure your express app is exported
 
@@ -16,6 +15,9 @@ describe('Auth API', () => {
                 .expect((res) => {
                     res.body.should.have.property('token');
                     res.body.user.should.have.property('username', 'testuser');
+                    res.body.user.should.have.property('email', 'test@example.com');
+                    res.body.user.should.have.property('created_at');
+                    res.body.user.should.have.property('updated_at');
                 })
                 .end(done);
         });

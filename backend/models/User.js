@@ -5,7 +5,12 @@ class User {
     static async create({ username, email, password_hash }) {
         const query = 'INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)';
         const [result] = await db.promise().execute(query, [username, email, password_hash]);
-        return { user_id: result.insertId, username, email };
+
+        // Fetch the newly created user with all fields including timestamps
+        const newUserQuery = 'SELECT user_id, username, email, created_at, updated_at FROM users WHERE user_id = ?';
+        const [newUser] = await db.promise().execute(newUserQuery, [result.insertId]);
+
+        return newUser[0];
     }
 
     static async findByEmail(email) {

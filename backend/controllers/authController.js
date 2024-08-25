@@ -7,6 +7,8 @@ const jwtConfig = require('../config/jwt');
 const register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
+	// Log the incoming data
+	console.log('Register data:', req.body);
 
         // Check if user already exists
         const existingUser = await User.findByEmail(email);
@@ -32,6 +34,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
+	console.log('Login Response:', res);
         const { email, password } = req.body;
 
         // Find user
