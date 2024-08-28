@@ -2,6 +2,7 @@ const express = require('express');
 const authRoutes = require('./auth');
 const portfolioController = require('../controllers/portfolioController');
 const transactionController = require('../controllers/transactionController');
+const trendingCryptocurrencyController = require('../controllers/trendingCryptocurrencyController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -19,5 +20,8 @@ router.post('/transactions', authMiddleware, transactionController.createTransac
 router.get('/transactions', authMiddleware, transactionController.getTransactions);
 router.put('/transactions', authMiddleware, transactionController.updateTransaction);
 router.delete('/transactions', authMiddleware, transactionController.deleteTransaction);
+
+// Trendingcryptos routes
+router.get('/trending', authMiddleware, trendingCryptocurrencyController.getTrendingCryptocurrencies);
 
 module.exports = router;
