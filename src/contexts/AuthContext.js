@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
             // Optionally fetch user data here
             setUser({ token }); // Simplified
         }
+        console.log('User initialized:', user);
         setLoading(false);
     }, []);
 

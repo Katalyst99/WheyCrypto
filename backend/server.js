@@ -1,11 +1,27 @@
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
-const { getCryptoPrices } = require('./services/cryptoService'); // Assume this service fetches latest prices
+const path = require('path');
+const routes = require('./routes/index');
+const { getCryptoPrices } = require('./services/cryptoService');
 
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Use the routes for REST API
+app.use('/api', routes);  // Prefix API routes with /api
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../build'))); // Corrected path
+
+// Serve React App for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build', 'index.html')); // Corrected path
+});
 
 wss.on('connection', (ws) => {
     console.log('Client connected');

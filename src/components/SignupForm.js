@@ -1,8 +1,11 @@
 // frontend/src/components/SignupForm.js
 import React, { useState } from 'react';
 import { register, setAuthToken } from '../services/authService';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 const SignupForm = () => {
+    const { setUser } = useContext(AuthContext);
     const [formData, setFormData] = useState({ username: '', email: '', password: '' });
     const [error, setError] = useState('');
 
@@ -15,6 +18,7 @@ const SignupForm = () => {
         try {
             const data = await register(formData);
             setAuthToken(data.token);
+            setUser({ token: data.token });
             // Redirect to dashboard or home page
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed');
